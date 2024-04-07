@@ -10,7 +10,7 @@ class OutBoundary : public SubDomain
 double w;
   bool inside(const Array<double>& x, bool on_boundary) const
   {
-    return (x[0] > 1.5 + w - DOLFIN_EPS);
+    return (x[0] > 2 + w - DOLFIN_EPS);
   }
 public:
   OutBoundary(double w): SubDomain(), w(w) {}
@@ -103,7 +103,7 @@ int main()
     {
       out = "w";
       out += width;
-      out += "/results/U";
+      out += "/U";
       out += std::to_string(U);
       out += "E";
       out += std::to_string(Ed);

@@ -25,13 +25,13 @@ public:
 
   void eval(Array<double>& values, const Array<double>& x) const
   {
-    if (x[0] > 0) {
-      values[0] = 1;
-      values[1] = 0;
+    if (x[0] < 0) {
+      values[0] = 0;
+      values[1] = 0.5;
     }
     else{
-        values[0] = 0;
-        values[1] = 0.5;
+        values[0] = 1;
+        values[1] = 0;
     }
   }
 
