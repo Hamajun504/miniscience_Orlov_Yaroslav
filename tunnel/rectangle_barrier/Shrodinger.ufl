@@ -1,0 +1,25 @@
+from ufl_legacy import (Coefficient, derivative, det, ds, dx,
+                 FiniteElement, grad, Identity, inner,
+                 TestFunction, TrialFunction, tr, interval, triangle,
+                 VectorElement, split, div)
+
+element = VectorElement("CG", interval, 2, 2)
+R = FiniteElement("Real", interval, 0)
+potential = FiniteElement("Lagrange", interval, 1)
+
+psi = TrialFunction(element)     # Incremental displacement
+psi_re, psi_im = split(psi)
+v  = TestFunction(element) 
+v_re, v_im = split(v)
+
+
+
+E = Coefficient(potential)
+f = Coefficient(potential)
+U = Coefficient(potential)
+
+
+a = -inner(grad(psi_re), grad(v_re))*dx -inner(grad(psi_im), grad(v_im))*dx + \
+     E*inner(psi_re,v_re)*dx + E*inner(psi_im, v_im)*dx - \
+     U*inner(psi_re, v_re)*dx - U*inner(psi_im, v_im)*dx
+L = inner(f, v_re)*dx + inner(f, v_im)*dx
