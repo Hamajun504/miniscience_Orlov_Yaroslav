@@ -81,10 +81,15 @@ class Potential : public Expression
 public:
 
   Potential(double U, double w) : Expression(0), U(U), w(w) {}
-
+  //rectangle
+  /* void eval(Array<double>& values, const Array<double>& x) const
+  {
+    values[0] = x[0] > 1 && x[0] <= 1 + w ? U : 0;
+  } */
+  //triangle
   void eval(Array<double>& values, const Array<double>& x) const
   {
-    if (x[0] < -0.1) values[0] = 0;
+    if (x[0] < -0.01) values[0] = 0;
     else if (x[0] < -0.05) values[0] = U / 0.05 * (x[0] + 0.1);
     else if (x[0] < 0.05) values[0] = -U / 0.15 * (x[1] - 0.1);
     else values[0] = 0;
