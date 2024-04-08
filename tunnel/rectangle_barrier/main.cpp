@@ -12,6 +12,11 @@ double w;
   {
     return (x[0] > 2 + w - DOLFIN_EPS);
   }
+  //если хочется видеть правильный результат
+  /* bool inside(const Array<double>& x, bool on_boundary) const
+  {
+    return on_boundary;
+  } */
 public:
   OutBoundary(double w): SubDomain(), w(w) {}
 };
@@ -27,6 +32,17 @@ public:
     values[0] = cos(k*(x[0] - 1 - w));
     values[1] = sin(k*(x[0] - 1 - w));
   }
+  //если хочется видеть странную реакцию на странные граничные условия
+  /* void eval(Array<double>& values, const Array<double>& x) const
+  {
+    if (x[0] < 1) {
+      values[0] = 1;
+      values[1] = 0;
+    } else {
+      values[0] = 0;
+      values[1] = 0.5;
+    }
+  } */
 
   std::size_t value_rank()const override
   {
